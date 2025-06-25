@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hepibesde</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffeef1, #fcefe7);
+      font-family: 'Georgia', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Intro Screen */
+    .intro {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: #fff8fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: fadeOut 2s ease 3s forwards;
+      z-index: 10;
+    }
+
+    .intro h1 {
+      font-size: 2em;
+      color: #e91e63;
+      margin-bottom: 10px;
+    }
+
+    .intro p {
+      font-size: 1em;
+      color: #555;
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Gambar Pemicu */
+    .surat {
+      width: 170px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: fadeInIcon 1.5s ease 4s forwards;
+    }
+
+    @keyframes fadeInIcon {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    /* Surat */
+    .surat-container {
+      display: none;
+      background: #fffdfc;
+      border: 3px solid #f8bbd0;
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 620px;
+      width: 90%;
+      margin-top: 10px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      animation: slideUp 1s ease;
+    }
+
+    .surat-container h1 {
+      color: #e91e63;
+      text-align: center;
+    }
+
+    .surat-container p {
+      font-size: 1.1em;
+      line-height: 1.7em;
+      color: #444;
+    }
+
+    .ttd {
+      text-align: right;
+      margin-top: 25px;
+      font-style: italic;
+      color: #888;
+    }
+
+    /* Galeri */
+    .galeri {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .galeri img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 2px solid #f8bbd0;
+      transition: transform 0.3s;
+    }
+
+    .galeri img:hover {
+      transform: scale(1.06);
+    }
+
+    @keyframes slideUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    .galery {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .galery img {
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 2px solid #f8bbd0;
+      transition: transform 0.3s;
+    }
+
+    .galery img:hover {
+      transform: scale(1.06);
+    }
+    
+    .btn-play {
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #fff;
+  padding: 3px 64px;
+  font-size: 1em;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.btn-play:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+    
+    .btn-play-mini {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  border: 2px solid #f8bbd0;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(255, 105, 135, 0.4);
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-play-mini:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 12px rgba(255, 105, 135, 0.5);
+}
+
+.audio-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+.btn-play-audio {
+  width: 36px;
+  height: 36px;
+ background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #fff;
+  border: 2px solid #f8bbd0;
+  border-radius: 50%;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-play-audio:hover {
+  transform: scale(1.1);
+}
+.audio-text {
+  padding: 6px 40px;
+  border: 2px solid #f8bbd0;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: white;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 16px;
+}
+.audio-story-bar {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.audio-button-wrapper {
+  flex: 0 0 auto;
+  width: 80px;
+  scroll-snap-align: start;
+  text-align: center;
+  cursor: pointer;
+}
+
+.audio-button {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 2px solid #f8bbd0;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.audio-button:hover {
+  transform: scale(1.1);
+}
+
+.audio-label {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+    
+  </style>
+</head>
+<body>
+
+  <!-- Intro -->
+  <div class="intro">
+    <h1>🎉HBD WOI🎂</h1>
+  </div>
+
+  <!-- Gambar Pemicu (Cewek / Icon Lucu) -->
+<img src="surat.jpg" id="trigger" class="surat" alt="Klik aku!" onclick="bukaSurat()" />
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+  <!-- Surat & Galeri -->
+  <div class="surat-container" id="kontenSurat">
+    <h1>🎂 Happy Birthday!</h1>
+    <p>
+      <h3>Selamat ulang taon putri</h3>
+     
+    <div class="audio-wrapper">
+  <button class="btn-play-audio" onclick="document.getElementById('salam-audio').play()">
+    ▶
+  </button>
+  <div class="audio-text">assalamualaikum</div>
+  <audio id="salam-audio" src="asswrwb.opus"></audio>
+</div> <br>Semoge sehat selalu teros sehat dah tu sehat sudah tu sehat agik lepas tu sehat, teros semoge kau tak saket tak banyak penyaket dak nyaket dak sakit dak siket<br><br>
+      
+      
+      maaf ye kalau selame ni aku banyak salah, banyak nyaketkan hati kau dah tu banyak salah teros banyak salah agik.
+       <br><br>
+      makaseh banyak ye dah semangatkan aku kmaren yang pas mama aku meninggal<br><br>
+      dah la, tak tau nak ketik ape agik
+      <audio id="musi" src="maaf.mp3"></audio>
+      
+      <button class="btn-play" onclick="document.getElementById('musi').play()">▶----------------</button>
+      
+    </p>
+    <div class="ttd">-rivo oxtora herizal</div>
+
+    <div class="galeri">
+      <img src="kipli.jpg" alt="Foto 1">
+      <img src="puput.jpg" alt="Foto 2">
+      <img src="putri.jpg" alt="Foto 3">
+    </div>
+    
+<br>
+
+  <div class="audio-story-bar">
+  <div class="audio-button-wrapper">
+    <button class="audio-button" onclick="playAudio('audio1')">▶</button>
+    <div class="audio-label">wah</div>
+    <audio id="audio1" src="kilingmi.mp3"></audio>
+  </div>
+  <div class="audio-button-wrapper">
+    <button class="audio-button" onclick="playAudio('audio2')">▶</button>
+    <div class="audio-label">anjir</div>
+    <audio id="audio2" src="rawr.opus"></audio>
+  </div>
+  <div class="audio-button-wrapper">
+    <button class="audio-button" onclick="playAudio('audio3')">▶</button>
+    <div class="audio-label">Makasih</div>
+    <audio id="audio3" src="kaudiam.opus"></audio>
+  </div>
+  <div class="audio-button-wrapper">
+    <button class="audio-button" onclick="playAudio('audio4')">▶</button>
+    <div class="audio-label">bang</div>
+    <audio id="audio4" src="tidakmenarik.opus"></audio>
+  </div>
+  <div class="audio-button-wrapper">
+    <button class="audio-button" onclick="playAudio('audio5')">▶</button>
+    <div class="audio-label">mantap</div>
+    <audio id="audio5" src="patroli.mp3"></audio>
+  </div>
+</div>
+
+  <script>
+    function bukaSurat() {
+      document.getElementById("kontenSurat").style.display = "block";
+    }
+    function bukaSurat() {
+  document.getElementById("kontenSurat").style.display = "block";
+  document.getElementById("trigger").style.display = "none"
+}
+
+function playAudio(id) {
+  const allAudio = document.querySelectorAll('audio');
+  allAudio.forEach(a => {
+    a.pause();
+    a.currentTime = 0;
+  });
+
+  const audio = document.getElementById(id);
+  audio.play();
+}
+  </script>
+
+</body>
+</html>
